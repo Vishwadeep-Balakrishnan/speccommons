@@ -85,6 +85,9 @@ body {
 /* ---- Header ---- */
 
 .header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   padding-bottom: var(--space-l);
   opacity: 0;
   transform: translateY(4px);
@@ -98,6 +101,54 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-text-quiet);
+}
+
+/* ---- Navigation (editorial metadata style) ---- */
+
+.nav {
+  display: flex;
+  align-items: baseline;
+  gap: 1.8em;
+}
+
+.nav-item {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-quiet);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 1px;
+  transition: color 0.35s ease;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-rule);
+  transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav-item:hover,
+.nav-item:focus {
+  color: var(--color-text-secondary);
+}
+
+.nav-item:hover::after,
+.nav-item:focus::after {
+  width: 100%;
+}
+
+.nav-item:focus-visible {
+  outline: 2px solid var(--color-text-quiet);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* ---- Main / Thesis ---- */
@@ -226,6 +277,10 @@ body {
     transform: none;
   }
 
+  .nav-item::after {
+    transition: none;
+  }
+
   #bg-canvas {
     display: none;
   }
@@ -250,6 +305,14 @@ body {
     padding-bottom: var(--space-m);
   }
 
+  .nav {
+    gap: 1.4em;
+  }
+
+  .nav-item {
+    font-size: 0.62rem;
+  }
+
   .footer {
     margin-top: var(--space-l);
   }
@@ -269,7 +332,19 @@ body {
   }
 
   .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
     padding-bottom: 1.25rem;
+  }
+
+  .nav {
+    gap: 1.2em;
+  }
+
+  .nav-item {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
   }
 
   .thesis-section {
@@ -292,4 +367,6 @@ body {
   .page { padding: 0; }
   .header, .reveal { opacity: 1; transform: none; }
   body { background: #fff; color: #000; }
+  .nav-item { color: #000; }
+  .nav-item::after { display: none; }
 }
