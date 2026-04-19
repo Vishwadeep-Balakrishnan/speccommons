@@ -73,34 +73,68 @@
       var card = document.createElement('article');
       card.className = 'project-card';
 
-      var coverHTML = '<div class="project-cover">' +
-        '<div class="project-cover-inner" style="--cover-from:' + project.coverFrom + ';--cover-to:' + project.coverTo + ';"></div>' +
-        '</div>';
+      /* Cover art */
+      var cover = document.createElement('div');
+      cover.className = 'project-cover';
+      var coverInner = document.createElement('div');
+      coverInner.className = 'project-cover-inner';
+      coverInner.style.setProperty('--cover-from', project.coverFrom);
+      coverInner.style.setProperty('--cover-to', project.coverTo);
+      cover.appendChild(coverInner);
+      card.appendChild(cover);
 
-      var metaHTML = '<div class="project-meta">';
+      /* Card body */
+      var body = document.createElement('div');
+      body.className = 'project-body';
+
+      /* Meta (tag + year) */
+      var meta = document.createElement('div');
+      meta.className = 'project-meta';
       if (project.tag) {
-        metaHTML += '<span class="project-tag">' + project.tag + '</span>';
+        var tag = document.createElement('span');
+        tag.className = 'project-tag';
+        tag.textContent = project.tag;
+        meta.appendChild(tag);
       }
       if (project.year) {
-        metaHTML += '<span class="project-year">' + project.year + '</span>';
+        var year = document.createElement('span');
+        year.className = 'project-year';
+        year.textContent = project.year;
+        meta.appendChild(year);
       }
-      metaHTML += '</div>';
+      body.appendChild(meta);
 
-      var titleHTML = '<h3 class="project-title">' + project.title + '</h3>';
-      var descHTML = '<p class="project-desc">' + project.description + '</p>';
+      /* Title */
+      var title = document.createElement('h3');
+      title.className = 'project-title';
+      title.textContent = project.title;
+      body.appendChild(title);
 
-      var linkHTML = '';
+      /* Description */
+      var desc = document.createElement('p');
+      desc.className = 'project-desc';
+      desc.textContent = project.description;
+      body.appendChild(desc);
+
+      /* Link or status */
       if (project.link) {
-        linkHTML = '<a class="project-link" href="' + project.link + '">Read more</a>';
+        var safeUrl = /^(https?:\/\/|\/)/i.test(project.link) ? project.link : '#';
+        var link = document.createElement('a');
+        link.className = 'project-link';
+        link.href = safeUrl;
+        link.textContent = 'Read more';
+        body.appendChild(link);
       } else if (project.status) {
-        linkHTML = '<span class="project-link" aria-hidden="true" style="pointer-events:none;opacity:0.55;">' + project.status + '</span>';
+        var status = document.createElement('span');
+        status.className = 'project-link';
+        status.setAttribute('aria-hidden', 'true');
+        status.style.pointerEvents = 'none';
+        status.style.opacity = '0.55';
+        status.textContent = project.status;
+        body.appendChild(status);
       }
 
-      card.innerHTML = coverHTML +
-        '<div class="project-body">' +
-        metaHTML + titleHTML + descHTML + linkHTML +
-        '</div>';
-
+      card.appendChild(body);
       fragment.appendChild(card);
     });
 
