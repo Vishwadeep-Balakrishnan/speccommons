@@ -1,7 +1,8 @@
 /* ========================================
    Speculative Commons — Interactive Layer
    Constellation background, scroll reveals,
-   and pointer-responsive atmosphere.
+   project rendering, and pointer-responsive
+   atmosphere.
    ======================================== */
 
 (function () {
@@ -12,7 +13,138 @@
   var motionAllowed = !motionQuery.matches;
 
   /* ========================================
-     1. Scroll-reveal (IntersectionObserver)
+     0. Project data — add future projects here
+     ======================================== */
+
+  var projects = [
+    {
+      title: 'Neglected philanthropic opportunities',
+      description: 'A systematic survey of cause areas where funding gaps remain disproportionately large relative to potential impact — mapping the white space between what matters and what gets funded.',
+      tag: 'Research',
+      year: '2025',
+      coverFrom: '#ddd8ce',
+      coverTo: '#c9c4b8',
+      link: null,
+      status: 'In progress'
+    },
+    {
+      title: 'Early funding and asymmetric impact',
+      description: 'Examining historical case studies where small, early-stage philanthropic bets produced outsized societal returns — from the Green Revolution to mRNA vaccine research.',
+      tag: 'Essay',
+      year: '2025',
+      coverFrom: '#d5dbd6',
+      coverTo: '#c2cac4',
+      link: null,
+      status: 'Forthcoming'
+    },
+    {
+      title: 'Mapping underfunded cause areas',
+      description: 'Building a living framework for identifying and evaluating cause areas that are structurally neglected by mainstream philanthropy, using quantitative and qualitative signals.',
+      tag: 'Framework',
+      year: '2025',
+      coverFrom: '#dbd6ce',
+      coverTo: '#cec8be',
+      link: null,
+      status: 'In progress'
+    },
+    {
+      title: 'First-principles philanthropy research',
+      description: 'Developing a rigorous methodology for evaluating philanthropic opportunities from first principles — independent of social proof, trend cycles, or institutional momentum.',
+      tag: 'Methodology',
+      year: '2025',
+      coverFrom: '#d2d5db',
+      coverTo: '#c0c4cc',
+      link: null,
+      status: 'Forthcoming'
+    }
+  ];
+
+  /* ========================================
+     1. Render project cards
+     ======================================== */
+
+  function renderProjects() {
+    var grid = document.getElementById('projects-grid');
+    if (!grid) return;
+
+    var fragment = document.createDocumentFragment();
+
+    projects.forEach(function (project) {
+      var card = document.createElement('article');
+      card.className = 'project-card';
+
+      /* Cover art */
+      var cover = document.createElement('div');
+      cover.className = 'project-cover';
+      var coverInner = document.createElement('div');
+      coverInner.className = 'project-cover-inner';
+      coverInner.style.setProperty('--cover-from', project.coverFrom);
+      coverInner.style.setProperty('--cover-to', project.coverTo);
+      cover.appendChild(coverInner);
+      card.appendChild(cover);
+
+      /* Card body */
+      var body = document.createElement('div');
+      body.className = 'project-body';
+
+      /* Meta (tag + year) */
+      var meta = document.createElement('div');
+      meta.className = 'project-meta';
+      if (project.tag) {
+        var tag = document.createElement('span');
+        tag.className = 'project-tag';
+        tag.textContent = project.tag;
+        meta.appendChild(tag);
+      }
+      if (project.year) {
+        var year = document.createElement('span');
+        year.className = 'project-year';
+        year.textContent = project.year;
+        meta.appendChild(year);
+      }
+      body.appendChild(meta);
+
+      /* Title */
+      var title = document.createElement('h3');
+      title.className = 'project-title';
+      title.textContent = project.title;
+      body.appendChild(title);
+
+      /* Description */
+      var desc = document.createElement('p');
+      desc.className = 'project-desc';
+      desc.textContent = project.description;
+      body.appendChild(desc);
+
+      /* Link or status */
+      if (project.link) {
+        var safeUrl = /^(https?:\/\/|\/)/i.test(project.link) ? project.link : '#';
+        var link = document.createElement('a');
+        link.className = 'project-link';
+        link.href = safeUrl;
+        link.textContent = 'Read more';
+        body.appendChild(link);
+      } else if (project.status) {
+        var status = document.createElement('span');
+        status.className = 'project-link';
+        status.setAttribute('aria-hidden', 'true');
+        status.style.pointerEvents = 'none';
+        status.style.opacity = '0.55';
+        status.textContent = project.status;
+        body.appendChild(status);
+      }
+
+      card.appendChild(body);
+      fragment.appendChild(card);
+    });
+
+    grid.appendChild(fragment);
+  }
+
+  renderProjects();
+
+  /* ========================================
+     2. Scroll-reveal (IntersectionObserver)
      ======================================== */
 
   function initReveal() {
@@ -39,7 +171,24 @@
   initReveal();
 
   /* ========================================
-     2. Background constellation animation
+     3. Smooth-scroll navigation
+     ======================================== */
+
+  document.querySelectorAll('.nav-item[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var targetId = this.getAttribute('href');
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: motionAllowed ? 'smooth' : 'auto', block: 'start' });
+        /* Update URL without jumping */
+        history.pushState(null, '', targetId);
+      }
+    });
+  });
+
+  /* ========================================
+     4. Background constellation animation
      ======================================== */
 
   var canvas = document.getElementById('bg-canvas');
