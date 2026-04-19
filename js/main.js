@@ -17,11 +17,11 @@
 
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
   var particles = [];
-  var PARTICLE_COUNT = 60;
-  var CONNECTION_DIST = 120;
-  var MAX_VX = 0.25;
-  var MAX_VY = 0.18;
-  var MAX_LINE_ALPHA = 0.07;
+  var PARTICLE_COUNT = 38;
+  var CONNECTION_DIST = 100;
+  var MAX_VX = 0.14;
+  var MAX_VY = 0.1;
+  var MAX_LINE_ALPHA = 0.045;
   var rafId;
 
   function resize() {
@@ -38,8 +38,8 @@
       y: Math.random() * window.innerHeight,
       vx: (Math.random() - 0.5) * MAX_VX,
       vy: (Math.random() - 0.5) * MAX_VY,
-      radius: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.35 + 0.08
+      radius: Math.random() * 1.2 + 0.4,
+      opacity: Math.random() * 0.25 + 0.05
     };
   }
 
