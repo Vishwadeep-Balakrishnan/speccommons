@@ -4,11 +4,18 @@ This guide covers how to add, edit, hide, and remove essays and homepage tiles.
 
 ## How the publishing system works
 
-The site is data-driven:
+The site is data-driven with **client-side Markdown rendering**:
 
-- `data/essays.js` is the single source of truth for homepage tiles.
+- `data/essays.js` is the single source of truth for homepage tiles and essay metadata.
 - `js/main.js` reads `window.ESSAYS` and renders the homepage grid.
-- `essays/<slug>.html` contains the full essay content page.
+- `essays/<slug>.html` is a lightweight HTML wrapper that loads the essay template.
+- `essays/<slug>.md` contains the essay body content written in Markdown.
+- `essays/template.html` is the master template (all essay `.html` files are copies of it).
+
+Each essay `.html` file automatically:
+1. Reads the slug from its own filename
+2. Looks up metadata (title, subtitle, tag, date, reading time, cover art) from `data/essays.js`
+3. Fetches the corresponding `.md` file and renders it to HTML using [marked.js](https://marked.js.org/)
 
 A tile appears on the homepage when an essay object exists in `data/essays.js` and is **not** archived.
 
@@ -63,11 +70,12 @@ Each essay entry looks like this:
 ## Add a new essay tile + essay page
 
 1. Add a new object to `data/essays.js`.
-2. Create `essays/<slug>.html` (slug must match the data entry).
-3. Choose a status:
+2. Copy `essays/template.html` as `essays/<slug>.html` (slug must match the data entry).
+3. Create `essays/<slug>.md` with the essay body content in Markdown.
+4. Choose a status:
    - `published` to make tile clickable now
    - `in-progress` or `forthcoming` to show non-clickable muted tile
-4. Open `index.html` in a browser and confirm the tile renders correctly.
+5. Open `index.html` in a browser and confirm the tile renders correctly.
 
 Example new entry:
 
@@ -132,7 +140,7 @@ This removes it from homepage rendering while preserving data/history.
 ### Full deletion (destructive)
 
 1. Remove the essay object from `data/essays.js`.
-2. Delete `essays/<slug>.html`.
+2. Delete `essays/<slug>.html` and `essays/<slug>.md`.
 3. Remove any now-unused image from `/assets/`.
 
 ## Cover images guide (gradient + custom image)
@@ -164,15 +172,13 @@ The homepage tile will render the image. Keeping gradient values provides fallba
 
 ### Option C: Custom image in essay hero section
 
-In `essays/<slug>.html`, update hero artwork:
+In `data/essays.js`, set the `coverImage` field:
 
-```html
-<div class="essay-hero-artwork">
-  <img src="../assets/my-cover.jpg" alt="Descriptive alt text">
-</div>
+```js
+coverImage: 'assets/my-cover.jpg'
 ```
 
-If you prefer gradient-only hero artwork, keep the existing gradient div pattern used in current essays.
+The essay template will automatically display the image in the hero section. If `coverImage` is `null`, the gradient is used as fallback.
 
 ## Managing `/assets/`
 
@@ -189,23 +195,46 @@ Recommended practices:
 
 ## Editing essay content
 
-To edit an essay:
+Essays are written in Markdown. To edit an essay:
 
-1. Open `essays/<slug>.html`.
-2. Update title/subtitle/meta content in the header section.
-3. Update body sections, headings, paragraphs, and links.
-4. Confirm navigation links still point correctly (usually `../index.html`).
-5. Preview in browser.
+1. Open `essays/<slug>.md` in any text editor.
+2. Edit the Markdown content (headings, paragraphs, lists, blockquotes, etc.).
+3. Save and refresh the essay page in your browser — changes appear immediately.
+
+### Supported Markdown features
+
+The essay template renders all standard Markdown into styled HTML using the `essay-body` CSS class:
+
+| Markdown | Rendered as | CSS styling |
+|---|---|---|
+| `## Heading` | `<h2>` | Section header |
+| `### Subheading` | `<h3>` | Subsection header |
+| Paragraphs | `<p>` | Serif body text |
+| `- item` | `<ul><li>` | Bulleted list |
+| `1. item` | `<ol><li>` | Numbered list |
+| `> quote` | `<blockquote>` | Left-bordered quote |
+| `**bold**` | `<strong>` | Bold emphasis |
+| `*italic*` | `<em>` | Italic emphasis |
+| `[text](url)` | `<a>` | Accent-colored link |
+| `---` | `<hr>` | Gradient horizontal rule |
+
+### What goes in the `.md` file vs. `data/essays.js`
+
+- **`.md` file**: Essay body content only (paragraphs, headings, lists, etc.)
+- **`data/essays.js`**: Title, subtitle, tag, date, reading time, cover art, description, status
+
+The hero section (artwork, title, subtitle, meta strip) is rendered automatically from `data/essays.js` — do **not** include the essay title as an `# H1` heading in the `.md` file.
 
 Also update `data/essays.js` when metadata shown on homepage should change (title, description, tag, year, status, artwork).
 
 ## Quick reference checklist
 
-- [ ] **Add essay**: add object in `data/essays.js` + create `essays/<slug>.html`
+- [ ] **Add essay**: add object in `data/essays.js` + copy `essays/template.html` as `essays/<slug>.html` + create `essays/<slug>.md`
+- [ ] **Edit essay content**: edit `essays/<slug>.md` — refresh browser to see changes
 - [ ] **Publish essay (clickable tile)**: set `status: 'published'`
 - [ ] **Show coming soon tile**: set `status: 'in-progress'` or `status: 'forthcoming'`
 - [ ] **Hide from homepage**: set `status: 'archived'`
-- [ ] **Delete essay completely**: remove data entry + delete HTML + clean unused `/assets/` files
+- [ ] **Delete essay completely**: remove data entry + delete `.html` + delete `.md` + clean unused `/assets/` files
 - [ ] **Add cover image**: add image to `/assets/` + set `coverImage: 'assets/<file>'`
 - [ ] **Keep fallback gradient**: keep `coverFrom` / `coverTo` even when using `coverImage`
-- [ ] **Update essay page hero image** (optional): use `../assets/<file>` in `essays/<slug>.html`
+- [ ] **Update essay page hero image** (optional): set `coverImage` in `data/essays.js`

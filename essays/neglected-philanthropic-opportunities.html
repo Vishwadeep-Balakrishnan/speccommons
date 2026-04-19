@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neglected philanthropic opportunities — Speculative Commons</title>
-  <meta name="description" content="A systematic survey of cause areas where funding gaps remain disproportionately large relative to potential impact.">
+  <title>Essay — Speculative Commons</title>
+  <meta name="description" content="Speculative Commons — rigorous analysis of neglected philanthropic opportunities.">
   <meta name="theme-color" content="#f5f3ee">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,89 +25,21 @@
 
     <main role="main">
       <article>
-        <!-- Hero -->
+        <!-- Hero — populated dynamically from data/essays.js -->
         <div class="essay-hero">
           <div class="essay-hero-artwork">
-            <div class="essay-hero-artwork-inner" style="--cover-from: #ddd8ce; --cover-to: #c9c4b8;"></div>
+            <div class="essay-hero-artwork-inner" id="hero-artwork"></div>
           </div>
 
-          <div class="essay-meta">
-            <span class="essay-meta-tag">Research</span>
-            <span class="essay-meta-separator" aria-hidden="true"></span>
-            <span class="essay-meta-item">March 2025</span>
-            <span class="essay-meta-separator" aria-hidden="true"></span>
-            <span class="essay-meta-item">14 min read</span>
-          </div>
+          <div class="essay-meta" id="essay-meta"></div>
 
-          <h1 class="essay-title">Neglected philanthropic opportunities</h1>
-          <p class="essay-subtitle">Mapping the white space between what matters and what gets funded</p>
+          <h1 class="essay-title" id="essay-title"></h1>
+          <p class="essay-subtitle" id="essay-subtitle"></p>
         </div>
 
-        <!-- Essay body -->
-        <div class="essay-body">
-          <p>Most philanthropic capital flows toward causes that are already visible, emotionally compelling, or culturally urgent. This is not irrational — it follows from how attention works, how media shapes priorities, and how donor networks reinforce one another's convictions. But it produces a systematic pattern: the causes that receive the most funding are rarely the ones where an additional dollar would do the most&nbsp;good.</p>
-
-          <p>This essay examines the structural reasons why certain cause areas remain chronically underfunded relative to their potential impact, and proposes a framework for identifying and evaluating these neglected&nbsp;opportunities.</p>
-
-          <h2>The attention economy of philanthropy</h2>
-
-          <p>Philanthropy, like investment, is shaped by information asymmetry. Donors tend to fund what they can see, understand, and feel emotionally connected to. The result is a distribution of funding that mirrors media salience more closely than it mirrors expected impact per&nbsp;dollar.</p>
-
-          <p>Consider three structural forces that shape philanthropic&nbsp;attention:</p>
-
-          <ul>
-            <li><strong>Visibility bias</strong> — causes that generate compelling imagery, personal narratives, or media coverage attract disproportionate funding relative to their tractability.</li>
-            <li><strong>Institutional momentum</strong> — established organisations with strong fundraising operations continue to attract capital even as their marginal returns diminish.</li>
-            <li><strong>Social proof cascades</strong> — donors follow other donors, creating concentration in popular cause areas while neglected domains remain systematically overlooked.</li>
-          </ul>
-
-          <p>These forces are not malicious. They are natural consequences of how human attention and social coordination work. But they create a landscape where the most important philanthropic opportunities — measured by the gap between what could be achieved and what is being funded — are often invisible to the majority of&nbsp;funders.</p>
-
-          <h2>Defining neglect</h2>
-
-          <p>We define a cause area as "neglected" when it satisfies three conditions&nbsp;simultaneously:</p>
-
-          <ol>
-            <li><strong>Scale</strong> — the problem affects a large number of people or has significant long-term consequences for human welfare.</li>
-            <li><strong>Tractability</strong> — there exist interventions that could meaningfully improve outcomes, given sufficient funding and expertise.</li>
-            <li><strong>Neglect</strong> — the current level of funding and attention is significantly below what the scale and tractability would justify.</li>
-          </ol>
-
-          <p>This framework — borrowed from effective altruism but extended with additional quantitative tools — allows us to systematically scan for gaps between importance and&nbsp;investment.</p>
-
-          <blockquote>
-            <p>The greatest opportunities in philanthropy are not found where the most donors are looking. They are found in the quiet spaces where rigorous analysis reveals that the cost of inaction far exceeds the cost of early&nbsp;intervention.</p>
-          </blockquote>
-
-          <h2>Case study: early-warning systems for emerging pandemics</h2>
-
-          <p>Before 2020, pandemic preparedness received a fraction of global health funding. The annual investment in early-warning biosurveillance systems was measured in tens of millions of dollars — trivial relative to the trillions of dollars in economic damage that a single pandemic could (and did)&nbsp;cause.</p>
-
-          <p>The asymmetry was staggering: for every dollar invested in pandemic early-warning systems, the expected return — measured in prevented economic damage and lives saved — was estimated at several hundred to one. Yet the cause area remained structurally neglected because it lacked the emotional immediacy of causes like childhood hunger or disaster&nbsp;relief.</p>
-
-          <p>This is the pattern we see repeatedly: interventions that are preventive, systemic, or technically complex tend to be underfunded relative to interventions that are reactive, visible, and emotionally&nbsp;resonant.</p>
-
-          <h2>A framework for discovery</h2>
-
-          <p>Identifying neglected opportunities requires looking where others are not. Our approach combines three analytical&nbsp;layers:</p>
-
-          <h3>Quantitative screening</h3>
-
-          <p>We begin by mapping the landscape of global cause areas and comparing their scale (measured in disability-adjusted life years, economic impact, or other relevant metrics) against current funding levels. This reveals the raw funding&nbsp;gaps.</p>
-
-          <h3>Tractability assessment</h3>
-
-          <p>Not every underfunded area is a good philanthropic opportunity. Some are underfunded because they are genuinely intractable. We apply probabilistic modelling to estimate the likelihood that targeted funding could shift outcomes within a reasonable&nbsp;timeframe.</p>
-
-          <h3>First-principles evaluation</h3>
-
-          <p>Finally, we evaluate each candidate opportunity from first principles — asking whether the underlying logic holds independently of institutional consensus or social proof. This step is crucial for avoiding the trap of merely following the next wave of philanthropic&nbsp;fashion.</p>
-
-          <hr>
-
-          <p>The white space in philanthropy is vast. Most of it is not empty because the problems are unimportant — it is empty because the problems are invisible, complex, or unfashionable. Speculative Commons exists to explore that white space, rigorously and&nbsp;independently.</p>
-
-          <p>The most important philanthropic opportunities of the next decade are probably not the ones that most donors are currently considering. They are the ones that will seem obvious in retrospect — but only to those who were paying close enough&nbsp;attention.</p>
+        <!-- Essay body — Markdown content injected here -->
+        <div class="essay-body" id="essay-content">
+          <p style="color: var(--color-text-quiet); font-style: italic;">Loading…</p>
         </div>
 
         <!-- Footer -->
@@ -118,6 +50,145 @@
       </article>
     </main>
   </div>
+
+  <!-- Essay data registry -->
+  <script src="../data/essays.js"></script>
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Essay loader -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ---- Extract essay slug from URL ---- */
+    var path = window.location.pathname;
+    var filename = path.split('/').pop() || '';
+    var slug = filename.replace(/\.html$/i, '');
+
+    if (!slug || slug === 'template') {
+      showError('No essay specified.');
+      return;
+    }
+
+    /* ---- Look up metadata in window.ESSAYS ---- */
+    var essays = window.ESSAYS || [];
+    var essay = null;
+    for (var i = 0; i < essays.length; i++) {
+      if (essays[i].slug === slug) {
+        essay = essays[i];
+        break;
+      }
+    }
+
+    if (!essay) {
+      showError('Essay not found.');
+      return;
+    }
+
+    /* ---- Render hero from metadata ---- */
+    renderHero(essay);
+
+    /* ---- Fetch and render Markdown ---- */
+    var mdUrl = slug + '.md';
+
+    fetch(mdUrl)
+      .then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.text();
+      })
+      .then(function (md) {
+        var html = marked.parse(md);
+        document.getElementById('essay-content').innerHTML = html;
+      })
+      .catch(function () {
+        showError('Unable to load essay content. The Markdown file may be missing.');
+      });
+
+    /* ---- Helper: render hero section ---- */
+    function renderHero(data) {
+      /* Page title */
+      document.title = data.title + ' — Speculative Commons';
+
+      /* Meta description */
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && data.description) {
+        metaDesc.setAttribute('content', data.description);
+      }
+
+      /* Cover artwork */
+      var artwork = document.getElementById('hero-artwork');
+      if (artwork) {
+        artwork.style.setProperty('--cover-from', data.coverFrom || '#e8e5de');
+        artwork.style.setProperty('--cover-to', data.coverTo || '#d8d4cb');
+
+        if (data.coverImage) {
+          var img = document.createElement('img');
+          img.src = '../' + data.coverImage;
+          img.alt = '';
+          artwork.appendChild(img);
+        }
+      }
+
+      /* Title and subtitle */
+      var titleEl = document.getElementById('essay-title');
+      if (titleEl) titleEl.textContent = data.title;
+
+      var subtitleEl = document.getElementById('essay-subtitle');
+      if (subtitleEl) subtitleEl.textContent = data.subtitle || '';
+
+      /* Meta strip: tag · date · reading time */
+      var metaStrip = document.getElementById('essay-meta');
+      if (!metaStrip) return;
+
+      var parts = [];
+
+      if (data.tag) {
+        parts.push('<span class="essay-meta-tag">' + escapeHTML(data.tag) + '</span>');
+      }
+
+      if (data.date) {
+        parts.push('<span class="essay-meta-item">' + formatDate(data.date) + '</span>');
+      }
+
+      if (data.readingTime) {
+        parts.push('<span class="essay-meta-item">' + escapeHTML(data.readingTime) + ' read</span>');
+      }
+
+      var separator = '<span class="essay-meta-separator" aria-hidden="true"></span>';
+      metaStrip.innerHTML = parts.join(separator);
+    }
+
+    /* ---- Helper: format date string ---- */
+    function formatDate(dateStr) {
+      var months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      var parts = dateStr.split('-');
+      if (parts.length < 2) return dateStr;
+      var monthIndex = parseInt(parts[1], 10) - 1;
+      return months[monthIndex] + ' ' + parts[0];
+    }
+
+    /* ---- Helper: escape HTML entities ---- */
+    function escapeHTML(str) {
+      var el = document.createElement('span');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+
+    /* ---- Helper: show error message ---- */
+    function showError(message) {
+      var content = document.getElementById('essay-content');
+      if (content) {
+        content.innerHTML = '<p style="color: var(--color-text-quiet); font-style: italic;">'
+          + escapeHTML(message) + '</p>';
+      }
+    }
+  })();
+  </script>
 
 </body>
 </html>
