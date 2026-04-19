@@ -1,27 +1,28 @@
 /* ========================================
    Speculative Commons — Stylesheet
-   An editorial manifesto page: warm, lyrical,
-   quietly alive, institutionally credible.
+   An editorial manifesto page: warm, modern,
+   left-offset layout, typographically uniform.
    ======================================== */
 
 :root {
   --color-bg: #f5f3ee;
   --color-text: #2b2a27;
-  --color-text-secondary: #4a4843;
+  --color-text-secondary: #403e3a;
   --color-text-quiet: #908d86;
   --color-rule: #d0cdc6;
-  --color-accent: #8a7e6b;
-  --color-pullline: #3d3b37;
 
-  --font-serif: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+  --font-serif: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --measure: 32em;
-  --space-xs: 0.5rem;
-  --space-s: 1rem;
-  --space-m: 1.75rem;
-  --space-l: 3rem;
-  --space-xl: 5rem;
+  --measure: 38rem;
+  --page-left: max(3rem, 12vw);
+  --page-right: 3rem;
+
+  --space-xs: 0.4rem;
+  --space-s: 0.75rem;
+  --space-m: 1.25rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
 }
 
 /* ---- Reset & Base ---- */
@@ -33,7 +34,7 @@
 }
 
 html {
-  font-size: 20px;
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -43,7 +44,7 @@ html {
 body {
   font-family: var(--font-serif);
   font-weight: 400;
-  line-height: 1.78;
+  line-height: 1.75;
   color: var(--color-text);
   background-color: var(--color-bg);
   position: relative;
@@ -65,7 +66,7 @@ body {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.15;
 }
 
 /* ---- Page Shell ---- */
@@ -76,15 +77,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: calc(var(--measure) + 6rem);
-  margin: 0 auto;
-  padding: var(--space-xl) 3rem var(--space-l);
+  max-width: calc(var(--page-left) + var(--measure) + var(--page-right));
+  padding: var(--space-xl) var(--page-right) var(--space-l) var(--page-left);
 }
 
 /* ---- Header ---- */
 
 .header {
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-l);
   opacity: 0;
   transform: translateY(4px);
   animation: fadeIn 1s cubic-bezier(0.23, 1, 0.32, 1) 0.15s forwards;
@@ -93,7 +93,7 @@ body {
 .brand {
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-text-quiet);
@@ -103,8 +103,6 @@ body {
 
 .main {
   flex: 1;
-  display: flex;
-  align-items: flex-start;
 }
 
 .thesis {
@@ -121,76 +119,24 @@ body {
 }
 
 .thesis-section p {
-  font-size: 1.05rem;
-  line-height: 1.82;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.78;
   letter-spacing: 0.005em;
   color: var(--color-text-secondary);
-  margin-bottom: 0.9em;
+  margin-bottom: 0.75em;
 }
 
 .thesis-section p:last-child {
   margin-bottom: 0;
 }
 
-/* Lead paragraph — slightly larger, drawing readers in */
-.thesis-section .thesis-lead {
-  font-size: 1.12rem;
-  line-height: 1.8;
-  color: var(--color-text);
-}
-
-/* ---- Pull-line: the key thesis moment ---- */
-
-.thesis-pullline {
-  position: relative;
-  margin: var(--space-l) 0;
-  padding: var(--space-m) 0 var(--space-m) 1.5rem;
-}
-
-.thesis-pullline p {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 500;
-  line-height: 1.55;
-  letter-spacing: 0.008em;
-  color: var(--color-pullline);
-}
-
-/* Animated left-margin trace mark */
-.pullline-mark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: var(--color-accent);
-  border-radius: 1px;
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: opacity 0.6s ease, transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.thesis-pullline.is-visible .pullline-mark {
-  opacity: 0.45;
-  transform: scaleY(1);
-}
-
-/* ---- Closing line ---- */
-
-.thesis-section .thesis-closing {
-  font-style: italic;
-  font-size: 1.08rem;
-  line-height: 1.7;
-  color: var(--color-text);
-  letter-spacing: 0.01em;
-}
-
 /* ---- Scroll-reveal system ---- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(10px);
   transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
               transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -200,17 +146,16 @@ body {
   transform: translateY(0);
 }
 
-/* Staggered initial entrance for above-the-fold content */
+/* Staggered initial entrance */
 .header ~ .main .reveal:nth-child(1) { transition-delay: 0.1s; }
-.header ~ .main .reveal:nth-child(2) { transition-delay: 0.25s; }
-.header ~ .main .reveal:nth-child(3) { transition-delay: 0.35s; }
-.header ~ .main .reveal:nth-child(4) { transition-delay: 0.45s; }
+.header ~ .main .reveal:nth-child(2) { transition-delay: 0.22s; }
+.header ~ .main .reveal:nth-child(3) { transition-delay: 0.34s; }
+.header ~ .main .reveal:nth-child(4) { transition-delay: 0.44s; }
 
 /* ---- Footer ---- */
 
 .footer {
   margin-top: var(--space-xl);
-  padding-top: 0;
   padding-bottom: var(--space-s);
 }
 
@@ -223,7 +168,7 @@ body {
 
 .footer-name {
   font-family: var(--font-sans);
-  font-size: 0.62rem;
+  font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.05em;
   color: var(--color-text-quiet);
@@ -232,7 +177,7 @@ body {
 
 .footer-email a {
   font-family: var(--font-sans);
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   letter-spacing: 0.02em;
   color: var(--color-text-quiet);
   text-decoration: none;
@@ -280,11 +225,6 @@ body {
     transform: none;
   }
 
-  .pullline-mark {
-    opacity: 0.45;
-    transform: scaleY(1);
-  }
-
   #bg-canvas {
     display: none;
   }
@@ -293,25 +233,21 @@ body {
 /* ---- Responsive ---- */
 
 @media (max-width: 768px) {
+  :root {
+    --page-left: 2.5rem;
+    --page-right: 2.5rem;
+  }
+
   html {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .page {
-    padding: var(--space-l) 2rem var(--space-m);
+    padding-top: var(--space-l);
   }
 
   .header {
-    padding-bottom: var(--space-l);
-  }
-
-  .thesis-pullline {
-    margin: var(--space-m) 0;
-    padding-left: 1.25rem;
-  }
-
-  .thesis-pullline p {
-    font-size: 1.25rem;
+    padding-bottom: var(--space-m);
   }
 
   .footer {
@@ -320,38 +256,33 @@ body {
 }
 
 @media (max-width: 480px) {
+  :root {
+    --page-left: 1.5rem;
+    --page-right: 1.5rem;
+  }
+
   html {
-    font-size: 18px;
+    font-size: 16.5px;
   }
 
   .page {
-    padding: 2.5rem 1.5rem 1.5rem;
+    padding-top: 2rem;
   }
 
   .header {
-    padding-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .thesis-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .thesis-section p {
-    margin-bottom: 0.75em;
-  }
-
-  .thesis-pullline {
-    margin: 1.5rem 0;
-    padding: 1.25rem 0 1.25rem 1rem;
-  }
-
-  .thesis-pullline p {
-    font-size: 1.15rem;
-    line-height: 1.5;
+    margin-bottom: 0.6em;
   }
 
   .footer {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
   }
 }
 
@@ -361,6 +292,5 @@ body {
   #bg-canvas { display: none; }
   .page { padding: 0; }
   .header, .reveal { opacity: 1; transform: none; }
-  .pullline-mark { opacity: 0.45; transform: scaleY(1); }
   body { background: #fff; color: #000; }
 }
