@@ -1,7 +1,8 @@
 /* ========================================
    Speculative Commons — Stylesheet
    An editorial manifesto page: warm, modern,
-   left-offset layout, typographically uniform.
+   balanced centered layout, typographically
+   uniform.
    ======================================== */
 
 :root {
@@ -11,18 +12,17 @@
   --color-text-quiet: #908d86;
   --color-rule: #d0cdc6;
 
-  --font-serif: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
+  --font-serif: 'Literata', 'Georgia', 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --measure: 38rem;
-  --page-left: max(3rem, 12vw);
-  --page-right: 3rem;
+  --measure: 43rem;
+  --page-inline: max(2.5rem, 8vw);
 
-  --space-xs: 0.4rem;
-  --space-s: 0.75rem;
-  --space-m: 1.25rem;
-  --space-l: 2rem;
-  --space-xl: 3rem;
+  --space-xs: 0.35rem;
+  --space-s: 0.6rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2.25rem;
 }
 
 /* ---- Reset & Base ---- */
@@ -77,8 +77,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: calc(var(--page-left) + var(--measure) + var(--page-right));
-  padding: var(--space-xl) var(--page-right) var(--space-l) var(--page-left);
+  max-width: calc(var(--measure) + var(--page-inline) * 2);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--page-inline) var(--space-l);
 }
 
 /* ---- Header ---- */
@@ -111,7 +112,7 @@ body {
 
 /* Thesis sections for grouped rhythm */
 .thesis-section {
-  margin-bottom: var(--space-m);
+  margin-bottom: 0.85rem;
 }
 
 .thesis-section:last-child {
@@ -122,10 +123,10 @@ body {
   font-family: var(--font-serif);
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.78;
+  line-height: 1.72;
   letter-spacing: 0.005em;
   color: var(--color-text-secondary);
-  margin-bottom: 0.75em;
+  margin-bottom: 0.6em;
 }
 
 .thesis-section p:last-child {
@@ -163,7 +164,7 @@ body {
   width: 2.5rem;
   height: 1px;
   background: var(--color-rule);
-  margin-bottom: var(--space-s);
+  margin-bottom: var(--space-xs);
 }
 
 .footer-name {
@@ -234,8 +235,7 @@ body {
 
 @media (max-width: 768px) {
   :root {
-    --page-left: 2.5rem;
-    --page-right: 2.5rem;
+    --page-inline: 2.25rem;
   }
 
   html {
@@ -257,8 +257,7 @@ body {
 
 @media (max-width: 480px) {
   :root {
-    --page-left: 1.5rem;
-    --page-right: 1.5rem;
+    --page-inline: 1.5rem;
   }
 
   html {
@@ -270,19 +269,19 @@ body {
   }
 
   .header {
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
   }
 
   .thesis-section {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .thesis-section p {
-    margin-bottom: 0.6em;
+    margin-bottom: 0.5em;
   }
 
   .footer {
-    margin-top: 2rem;
+    margin-top: 1.75rem;
   }
 }
 
