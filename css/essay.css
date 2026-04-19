@@ -1,0 +1,424 @@
+/* ========================================
+   Speculative Commons — Essay Page Styles
+   A refined editorial reading environment
+   that inherits the core design language.
+   ======================================== */
+
+/* ---- Essay Page Shell ---- */
+
+.essay-page {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: calc(var(--measure) + var(--page-inline) * 2);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--page-inline) var(--space-l);
+}
+
+/* ---- Essay Header ---- */
+
+.essay-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: var(--space-l);
+  opacity: 0;
+  transform: translateY(4px);
+  animation: fadeIn 1s cubic-bezier(0.23, 1, 0.32, 1) 0.15s forwards;
+}
+
+/* ---- Back Navigation ---- */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-quiet);
+  text-decoration: none;
+  transition: color 0.35s ease, gap 0.35s ease;
+}
+
+.back-link::before {
+  content: '←';
+  font-size: 0.72rem;
+  transition: transform 0.3s ease;
+}
+
+.back-link:hover,
+.back-link:focus {
+  color: var(--color-text-secondary);
+  gap: 0.55em;
+}
+
+.back-link:hover::before {
+  transform: translateX(-2px);
+}
+
+.back-link:focus-visible {
+  outline: 2px solid var(--color-text-quiet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Essay Hero ---- */
+
+.essay-hero {
+  margin-bottom: var(--space-2xl);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+}
+
+.essay-hero-artwork {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  margin-bottom: var(--space-xl);
+}
+
+.essay-hero-artwork-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--cover-from, #e8e5de), var(--cover-to, #d8d4cb));
+}
+
+.essay-hero-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---- Essay Meta Strip ---- */
+
+.essay-meta {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-m);
+}
+
+.essay-meta-tag {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-accent-muted);
+  padding: 0.2em 0.55em;
+  border-radius: 3px;
+  line-height: 1.6;
+}
+
+.essay-meta-item {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.03em;
+  color: var(--color-text-quiet);
+}
+
+.essay-meta-separator {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-rule);
+  flex-shrink: 0;
+}
+
+/* ---- Essay Title Block ---- */
+
+.essay-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  margin-bottom: 0.35em;
+  max-width: var(--measure);
+}
+
+.essay-subtitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--color-text-quiet);
+  max-width: 34rem;
+}
+
+/* ---- Essay Body ---- */
+
+.essay-body {
+  max-width: var(--measure);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+}
+
+/* Divider between hero and body */
+.essay-body::before {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  margin-bottom: var(--space-2xl);
+}
+
+/* ---- Essay Typography ---- */
+
+.essay-body p {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.78;
+  letter-spacing: 0.005em;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.2em;
+}
+
+.essay-body p:last-child {
+  margin-bottom: 0;
+}
+
+.essay-body h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+}
+
+.essay-body h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+
+.essay-body blockquote {
+  margin: 1.8em 0;
+  padding-left: 1.5em;
+  border-left: 2px solid var(--color-rule);
+}
+
+.essay-body blockquote p {
+  font-style: italic;
+  color: var(--color-text-quiet);
+  font-size: 0.95rem;
+}
+
+.essay-body ul,
+.essay-body ol {
+  margin-bottom: 1.2em;
+  padding-left: 1.5em;
+}
+
+.essay-body li {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.4em;
+}
+
+.essay-body strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.essay-body em {
+  font-style: italic;
+}
+
+.essay-body a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(107, 124, 110, 0.3);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.essay-body a:hover,
+.essay-body a:focus {
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-text-secondary);
+}
+
+.essay-body a:focus-visible {
+  outline: 2px solid var(--color-text-quiet);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.essay-body hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-rule), transparent 70%);
+  margin: 2.5em 0;
+}
+
+/* ---- Essay Footer ---- */
+
+.essay-footer {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.7s forwards;
+}
+
+.essay-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-rule), transparent 70%);
+}
+
+.essay-footer-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.35s ease, gap 0.35s ease;
+}
+
+.essay-footer-back::before {
+  content: '←';
+  font-size: 0.72rem;
+  transition: transform 0.3s ease;
+}
+
+.essay-footer-back:hover,
+.essay-footer-back:focus {
+  color: var(--color-text-secondary);
+  gap: 0.55em;
+}
+
+.essay-footer-back:hover::before {
+  transform: translateX(-2px);
+}
+
+.essay-footer-back:focus-visible {
+  outline: 2px solid var(--color-text-quiet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.essay-footer-brand {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-quiet);
+  margin-top: var(--space-xl);
+}
+
+/* ---- Responsive — Essay ---- */
+
+@media (max-width: 768px) {
+  .essay-page {
+    padding-top: var(--space-l);
+  }
+
+  .essay-header {
+    padding-bottom: var(--space-m);
+  }
+
+  .essay-title {
+    font-size: 1.6rem;
+  }
+
+  .essay-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .essay-hero-artwork {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 480px) {
+  .essay-page {
+    padding-top: 2rem;
+  }
+
+  .essay-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .essay-title {
+    font-size: 1.35rem;
+  }
+
+  .essay-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .essay-hero {
+    margin-bottom: var(--space-xl);
+  }
+
+  .essay-hero-artwork {
+    aspect-ratio: 16 / 10;
+    margin-bottom: var(--space-l);
+  }
+
+  .essay-meta {
+    gap: 0.7em;
+  }
+
+  .essay-footer {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+  }
+}
+
+/* ---- Print — Essay ---- */
+
+@media print {
+  .essay-header,
+  .essay-hero,
+  .essay-body,
+  .essay-footer {
+    opacity: 1;
+    transform: none;
+  }
+
+  .essay-hero-artwork {
+    break-inside: avoid;
+  }
+}

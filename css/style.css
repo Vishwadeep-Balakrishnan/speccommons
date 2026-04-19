@@ -253,10 +253,10 @@ body::before {
   color: var(--color-text);
 }
 
-/* Projects grid — editorial 2-column */
+/* Projects grid — editorial responsive grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
   gap: 1.5rem;
 }
 
@@ -399,6 +399,47 @@ body::before {
   outline: 2px solid var(--color-text-quiet);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* Published card — entire card is an <a> link */
+a.project-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* In-progress / forthcoming cards — tasteful disabled state */
+.project-card--in-progress,
+.project-card--forthcoming {
+  opacity: 0.72;
+  cursor: default;
+}
+
+.project-card--in-progress:hover,
+.project-card--forthcoming:hover {
+  transform: none;
+  box-shadow: none;
+  background: var(--color-card-bg);
+  border-color: var(--color-card-border);
+}
+
+.project-card--in-progress .project-cover-inner,
+.project-card--forthcoming .project-cover-inner {
+  filter: saturate(0.6);
+}
+
+/* Status badge for non-published cards */
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-quiet);
+  margin-top: 0.8rem;
+  opacity: 0.7;
 }
 
 /* ---- Contact Section ---- */
@@ -587,7 +628,6 @@ body::before {
   }
 
   .projects-grid {
-    grid-template-columns: 1fr;
     gap: 1.25rem;
   }
 
