@@ -1,7 +1,8 @@
 /* ========================================
    Speculative Commons — Interactive Layer
    Constellation background, scroll reveals,
-   and pointer-responsive atmosphere.
+   project rendering, and pointer-responsive
+   atmosphere.
    ======================================== */
 
 (function () {
@@ -12,7 +13,104 @@
   var motionAllowed = !motionQuery.matches;
 
   /* ========================================
-     1. Scroll-reveal (IntersectionObserver)
+     0. Project data — add future projects here
+     ======================================== */
+
+  var projects = [
+    {
+      title: 'Neglected philanthropic opportunities',
+      description: 'A systematic survey of cause areas where funding gaps remain disproportionately large relative to potential impact — mapping the white space between what matters and what gets funded.',
+      tag: 'Research',
+      year: '2025',
+      coverFrom: '#ddd8ce',
+      coverTo: '#c9c4b8',
+      link: null,
+      status: 'In progress'
+    },
+    {
+      title: 'Early funding and asymmetric impact',
+      description: 'Examining historical case studies where small, early-stage philanthropic bets produced outsized societal returns — from the Green Revolution to mRNA vaccine research.',
+      tag: 'Essay',
+      year: '2025',
+      coverFrom: '#d5dbd6',
+      coverTo: '#c2cac4',
+      link: null,
+      status: 'Forthcoming'
+    },
+    {
+      title: 'Mapping underfunded cause areas',
+      description: 'Building a living framework for identifying and evaluating cause areas that are structurally neglected by mainstream philanthropy, using quantitative and qualitative signals.',
+      tag: 'Framework',
+      year: '2025',
+      coverFrom: '#dbd6ce',
+      coverTo: '#cec8be',
+      link: null,
+      status: 'In progress'
+    },
+    {
+      title: 'First-principles philanthropy research',
+      description: 'Developing a rigorous methodology for evaluating philanthropic opportunities from first principles — independent of social proof, trend cycles, or institutional momentum.',
+      tag: 'Methodology',
+      year: '2025',
+      coverFrom: '#d2d5db',
+      coverTo: '#c0c4cc',
+      link: null,
+      status: 'Forthcoming'
+    }
+  ];
+
+  /* ========================================
+     1. Render project cards
+     ======================================== */
+
+  function renderProjects() {
+    var grid = document.getElementById('projects-grid');
+    if (!grid) return;
+
+    var fragment = document.createDocumentFragment();
+
+    projects.forEach(function (project) {
+      var card = document.createElement('article');
+      card.className = 'project-card';
+
+      var coverHTML = '<div class="project-cover">' +
+        '<div class="project-cover-inner" style="--cover-from:' + project.coverFrom + ';--cover-to:' + project.coverTo + ';"></div>' +
+        '</div>';
+
+      var metaHTML = '<div class="project-meta">';
+      if (project.tag) {
+        metaHTML += '<span class="project-tag">' + project.tag + '</span>';
+      }
+      if (project.year) {
+        metaHTML += '<span class="project-year">' + project.year + '</span>';
+      }
+      metaHTML += '</div>';
+
+      var titleHTML = '<h3 class="project-title">' + project.title + '</h3>';
+      var descHTML = '<p class="project-desc">' + project.description + '</p>';
+
+      var linkHTML = '';
+      if (project.link) {
+        linkHTML = '<a class="project-link" href="' + project.link + '">Read more</a>';
+      } else if (project.status) {
+        linkHTML = '<span class="project-link" aria-hidden="true" style="pointer-events:none;opacity:0.55;">' + project.status + '</span>';
+      }
+
+      card.innerHTML = coverHTML +
+        '<div class="project-body">' +
+        metaHTML + titleHTML + descHTML + linkHTML +
+        '</div>';
+
+      fragment.appendChild(card);
+    });
+
+    grid.appendChild(fragment);
+  }
+
+  renderProjects();
+
+  /* ========================================
+     2. Scroll-reveal (IntersectionObserver)
      ======================================== */
 
   function initReveal() {
@@ -39,7 +137,24 @@
   initReveal();
 
   /* ========================================
-     2. Background constellation animation
+     3. Smooth-scroll navigation
+     ======================================== */
+
+  document.querySelectorAll('.nav-item[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var targetId = this.getAttribute('href');
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: motionAllowed ? 'smooth' : 'auto', block: 'start' });
+        /* Update URL without jumping */
+        history.pushState(null, '', targetId);
+      }
+    });
+  });
+
+  /* ========================================
+     4. Background constellation animation
      ======================================== */
 
   var canvas = document.getElementById('bg-canvas');
