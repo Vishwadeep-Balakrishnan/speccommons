@@ -19,6 +19,9 @@
   var particles = [];
   var PARTICLE_COUNT = 60;
   var CONNECTION_DIST = 120;
+  var MAX_VX = 0.25;
+  var MAX_VY = 0.18;
+  var MAX_LINE_ALPHA = 0.07;
   var rafId;
 
   function resize() {
@@ -33,8 +36,8 @@
     return {
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.18,
+      vx: (Math.random() - 0.5) * MAX_VX,
+      vy: (Math.random() - 0.5) * MAX_VY,
       radius: Math.random() * 1.5 + 0.5,
       opacity: Math.random() * 0.35 + 0.08
     };
@@ -61,7 +64,7 @@
         var dy = particles[i].y - particles[j].y;
         var dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < CONNECTION_DIST) {
-          var alpha = (1 - dist / CONNECTION_DIST) * 0.07;
+          var alpha = (1 - dist / CONNECTION_DIST) * MAX_LINE_ALPHA;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
