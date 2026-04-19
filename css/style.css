@@ -133,10 +133,10 @@ body {
 }
 
 /* Lead paragraph — slightly larger, drawing readers in */
-.thesis-lead {
-  font-size: 1.12rem !important;
-  line-height: 1.8 !important;
-  color: var(--color-text) !important;
+.thesis-section .thesis-lead {
+  font-size: 1.12rem;
+  line-height: 1.8;
+  color: var(--color-text);
 }
 
 /* ---- Pull-line: the key thesis moment ---- */
@@ -178,11 +178,11 @@ body {
 
 /* ---- Closing line ---- */
 
-.thesis-closing {
+.thesis-section .thesis-closing {
   font-style: italic;
-  font-size: 1.08rem !important;
-  line-height: 1.7 !important;
-  color: var(--color-text) !important;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--color-text);
   letter-spacing: 0.01em;
 }
 
