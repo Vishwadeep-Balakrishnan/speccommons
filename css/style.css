@@ -508,6 +508,15 @@ a.project-card {
   color: var(--color-text);
 }
 
+.contact-title {
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--color-text-quiet);
+  margin-top: 0.15em;
+}
+
 .contact-email a {
   font-family: var(--font-sans);
   font-size: 0.72rem;
