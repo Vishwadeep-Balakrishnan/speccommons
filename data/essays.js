@@ -30,7 +30,7 @@ window.ESSAYS = [
     description: 'A systematic survey of cause areas where funding gaps remain disproportionately large relative to potential impact — mapping the white space between what matters and what gets funded.',
     tag: 'Research',
     year: '2025',
-    status: 'published',
+    status: 'forthcoming',
     date: '2025-04-12',
     readingTime: '14 min',
     coverFrom: '#ddd8ce',
