@@ -28,7 +28,7 @@ window.ESSAYS = [
     title: 'Turning Wastewater into the World’s Cheapest Fuels',
     subtitle: '',
     description: 'Converting sewage and wastes into affordable, scalable fuel with net negative input costs to reduce energy costs for billions while turning waste into resources.',
-    tag: 'Research',
+    tag: 'Project',
     year: '2026',
     status: 'forthcoming',
     date: '2025-04-12',
